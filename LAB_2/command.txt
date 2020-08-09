@@ -1,0 +1,11 @@
+*For Create NetModule File:
+>csc /t:module addition.cs 
+>csc /t:module multiplication.cs
+
+*For combine both netmodule file in one calc.dll
+>csc /t:library /addmodule:addition.netmodule /addmodule:multiplication.netmodule calc.cs
+
+*create driver program and refer calc.dll
+>csc /t:exe /r:calc.dll driver.cs
+
+run driver.exe program
