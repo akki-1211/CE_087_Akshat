@@ -1,0 +1,23 @@
+steps to create strong named assembly calc.dll and deploy it to GAC
+1. create strong named key file
+>snk -k snkey.snk
+2. create dll with refer keyfile
+>csc /t:library /keyfile:snkey.snk calc.cs
+3. create driver program for run.
+4.create GAC
+>gacutil -i calc.dll
+now run driver program anywhere.
+
+steps to create strong named assembly with new version calc.dll and deploy it to GAC
+
+1. Create new folder and put old calc.cs and snkey.snk file in that folder.
+2. change the calc.cs code which indicate version update and add following line in the beginning :
+ -using System.Reflection;
+ -[assembly: AssemblyVersion("1.0.0.0")]
+3. Compile using keyfile and verify change in version in bottom most part of file.
+>ildasm calc.dll
+4. Deploy new version to GAC and verify physically two folders created.
+>gacutil -i calc.dll
+
+location for check two physical folders:
+C:\Windows\Microsoft.NET\assembly\GAC_MSIL\calc
